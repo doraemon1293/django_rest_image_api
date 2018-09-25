@@ -157,7 +157,10 @@ X-Frame-Options: SAMEORIGIN
     
 
 ## TEST
-python manage.py test
+```
+python manage.py runserver  
+python manage.py test  
+```
 1. class ListImagesTest  
   test the api to list all images  
 2. class GetImageTest  
