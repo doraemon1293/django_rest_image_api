@@ -172,3 +172,30 @@ python manage.py test
   upload the image and download the rotated image. this method will also compare whether the transfered file is exactly the same with sample file  
 
 
+##Implementation Discussions
+1. What language platform did you select to implement the microservice? Why?  
+    Python,django-rest, it is a flexible, simple to develop to RESTful services.  
+    
+2. How did you store the uploaded images?  
+    They're save as file in MEDIA_ROOT folder (local file system)  
+    
+3. What would you do differently to your implementation if you had more time?  
+  - Switch sqlite to another database , for example, mysql for Robust and commercial support, Key-value NoSQL Database (Redis, MongoDB etc.) for fast retrieval.  
+  - use cloud storage instead of local file system  
+  - use load balance with multiple backend services to have better horizontal scalability  
+  - use Docker and Kubernetes to ensure equivalent environment and ease deployment.  
+
+
+4. How would coordinate your development environment to handle the build and test process?  
+    Create separate virtual environments for development, test, and production.  The deployment environment only contains essential dependencies.  
+
+5. What technologies would you use to ease the task of deploying the microservices to a production runtime environment?  
+    Continuous Integration/Continuous Deployment Tools such as Jenkins and Travis CI can be employed to ease the task of deploying the microservices.  
+
+6. What testing did (or would) you do, and why?
+    Unit test has been added as described in Section XXX.  In the test environment, I would like to run Stress test to understand the robustness of the system.
+
+
+
+##Authors
+Yan HUANG
