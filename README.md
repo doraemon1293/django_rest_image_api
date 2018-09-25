@@ -28,12 +28,12 @@ Please see requirements.txt for more information.
 
 ## API
 
-1.  List all images
-   API: ``` image_api/  ```
-   Method: GET
-   Possible Status Code: 200, 404, 50X
-   Example of input: ```http GET http://127.0.0.1:8000/image_api/```
-   Example of output
+1.  List all images  
+   API: ``` image_api/  ```  
+   Method: GET  
+   Possible Status Code: 200, 50X  
+   Example of input: ```http GET http://127.0.0.1:8000/image_api/```  
+   Example of output  
 ```
 HTTP/1.1 200 OK
 Allow: GET, POST, HEAD, OPTIONS
@@ -56,11 +56,11 @@ X-Frame-Options: SAMEORIGIN
 pk is primary key, fn is the URL of uploaded file, extension is the format of the image  
 
 2.  Get a image  
-  URL: ```image_api/<int:pk>/  ```
-   Method: GET
-   Possible Status Code: 200, 404, 50X
-   Example of input: ```http GET http://127.0.0.1:8000/image_api/47/```
-   Example of output:
+  URL: ```image_api/<int:pk>/  ```  
+   Method: GET  
+   Possible Status Code: 200, 404  
+   Example of input: ```http GET http://127.0.0.1:8000/image_api/47/```  
+   Example of output:  
    ```
    HTTP/1.1 200 OK
 Allow: GET, PUT, DELETE, HEAD, OPTIONS
@@ -79,13 +79,13 @@ X-Frame-Options: SAMEORIGIN
 ```
 
 
-3.  Upload images
-    API: ``` image_api/```
-   Method: POST
-   Possible Status Code: 200, 404, 50X
+3.  Upload images  
+    API: ``` image_api/```  
+   Method: POST  
+   Possible Status Code: 201, 50X  
 Example of input: ```http -f POST http://127.0.0.1:8000/i
-mage_api/ fn@C:\1.jpeg```
-Example of output:
+mage_api/ fn@C:\1.jpeg```  
+Example of output:  
 ```
 HTTP/1.1 201 Created
 Allow: GET, POST, HEAD, OPTIONS
@@ -102,12 +102,12 @@ X-Frame-Options: SAMEORIGIN
     "pk": 48
 }
 ```
-4.  convert format of a image
-    API:```image_api/<int:pk>/transfer/<image_format:extension>/```
-   Method: GET
-   Possible Status Code: 200, 404, 50X
-Example of input: ```http GET  http://127.0.0.1:8000/image_api/48/transfer/png/```
-Example of output:
+4.  Convert format of a image  
+    API:```image_api/<int:pk>/transfer/<image_format:extension>/```  
+   Method: GET  
+   Possible Status Code: 200, 404  
+Example of input: ```http GET  http://127.0.0.1:8000/image_api/48/transfer/png/```  
+Example of output:  
 ```
 HTTP/1.1 200 OK
 Allow: GET, HEAD, OPTIONS
@@ -127,12 +127,12 @@ X-Frame-Options: SAMEORIGIN
 ```
 pk is primary key, source_pk is the foreign key to original image. fn is the URL of uploaded file, extension is the format of the image.
 
-5.  rotate image
-    API: ```image_api/<int:pk>/rotate/<int:degree>/```
-   Method: GET
-   Possible Status Code: 200, 404, 50X
-Example of input: ```http GET  http://127.0.0.1:8000/image_api/48/rotate/90/```
-Example of output:
+5.  Rotate image  
+    API: ```image_api/<int:pk>/rotate/<int:degree>/```  
+   Method: GET  
+   Possible Status Code: 200, 404  
+Example of input: ```http GET  http://127.0.0.1:8000/image_api/48/rotate/90/```  
+Example of output:  
 ```
 HTTP/1.1 200 OK
 Allow: GET, HEAD, OPTIONS
@@ -150,24 +150,24 @@ X-Frame-Options: SAMEORIGIN
     "source_pk": 48
 }
 ```
-6.  to download file
-  URL: HOSTNAME+fn
-  example:```
+6.  To download file  
+  URL: HOSTNAME+fn  
+  example:```  
     http http://127.0.0.1:8000/images/7033ab72-1bfa-46e4-9428-3b3e780d5972.jpeg -o download_file_name```
     
 
 ## TEST
-1. class ListImagesTest
-  test the api to list all images
-2. class GetImageTest
-  test the api to get a specific all images as per pk
-3. class UploadImageTest
-  upload an Image, get the Image file, download file and compare whether the files is the same with original one
-4. class TransferImageTest
+1. class ListImagesTest  
+  test the api to list all images  
+2. class GetImageTest  
+  test the api to get a specific all images as per pk  
+3. class UploadImageTest  
+  upload an Image, get the Image file, download file and compare whether the files is the same with original one  
+4. class TransferImageTest  
   upload the image and download the format converted image,
   if _compare_file_required, this method will also compare whether the transfered file is exactly the same with sample file
-  As some conversion cannot guarantee the file is always the same, for example from png to jpeg, so should not compare files in that case
-5. class RotateImageTest
-  upload the image and download the rotated image. this method will also compare whether the transfered file is exactly the same with sample file
+  As some conversion cannot guarantee the file is always the same, for example from png to jpeg, so should not compare files in that case  
+5. class RotateImageTest  
+  upload the image and download the rotated image. this method will also compare whether the transfered file is exactly the same with sample file  
 
 
