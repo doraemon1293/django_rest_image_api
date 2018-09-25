@@ -156,23 +156,7 @@ X-Frame-Options: SAMEORIGIN
     http http://127.0.0.1:8000/images/7033ab72-1bfa-46e4-9428-3b3e780d5972.jpeg -o download_file_name```
     
 
-## TEST
-```
-python manage.py runserver  
-python manage.py test  
-```
-1. class ListImagesTest  
-  test the api to list all images  
-2. class GetImageTest  
-  test the api to get a specific all images as per pk  
-3. class UploadImageTest  
-  upload an Image, get the Image file, download file and compare whether the files is the same with original one  
-4. class TransferImageTest  
-  upload the image and download the format converted image,
-  if _compare_file_required, this method will also compare whether the transfered file is exactly the same with sample file
-  As some conversion cannot guarantee the file is always the same, for example from png to jpeg, so should not compare files in that case  
-5. class RotateImageTest  
-  upload the image and download the rotated image. this method will also compare whether the transfered file is exactly the same with sample file  
+
 
 ## Implementation Discussions
 1. What language platform did you select to implement the microservice? Why?  
@@ -195,7 +179,25 @@ python manage.py test
     Continuous Integration/Continuous Deployment Tools such as Jenkins and Travis CI can be employed to ease the task of deploying the microservices.  
 
 6. What testing did (or would) you do, and why?
-    Unit test has been added as described in Section XXX.  In the test environment, I would like to run Stress test to understand the robustness of the system.  
+    Unit test has been added as described in below Section TEST.  In the test environment, I would like to run Stress test to understand the robustness of the system.  
+
+## TEST
+```
+python manage.py runserver  
+python manage.py test  
+```
+1. class ListImagesTest  
+  test the api to list all images  
+2. class GetImageTest  
+  test the api to get a specific all images as per pk  
+3. class UploadImageTest  
+  upload an Image, get the Image file, download file and compare whether the files is the same with original one  
+4. class TransferImageTest  
+  upload the image and download the format converted image,
+  if _compare_file_required, this method will also compare whether the transfered file is exactly the same with sample file
+  As some conversion cannot guarantee the file is always the same, for example from png to jpeg, so should not compare files in that case  
+5. class RotateImageTest  
+  upload the image and download the rotated image. this method will also compare whether the transfered file is exactly the same with sample file  
 
 ## Authors
 Yan HUANG
