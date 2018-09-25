@@ -10,7 +10,7 @@ Python 3.5.4
 Virtual environment  
 Django 2.1.1  
 djangorestframework 3.8.2  
-
+httpie==0.9.9  
 
 ## Quick Start
 
