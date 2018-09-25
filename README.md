@@ -171,8 +171,7 @@ python manage.py test
 5. class RotateImageTest  
   upload the image and download the rotated image. this method will also compare whether the transfered file is exactly the same with sample file  
 
-
-##Implementation Discussions
+## Implementation Discussions
 1. What language platform did you select to implement the microservice? Why?  
     Python,django-rest, it is a flexible, simple to develop to RESTful services.  
     
@@ -193,9 +192,7 @@ python manage.py test
     Continuous Integration/Continuous Deployment Tools such as Jenkins and Travis CI can be employed to ease the task of deploying the microservices.  
 
 6. What testing did (or would) you do, and why?
-    Unit test has been added as described in Section XXX.  In the test environment, I would like to run Stress test to understand the robustness of the system.
+    Unit test has been added as described in Section XXX.  In the test environment, I would like to run Stress test to understand the robustness of the system.  
 
-
-
-##Authors
+## Authors
 Yan HUANG
