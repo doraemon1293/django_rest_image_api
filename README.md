@@ -27,7 +27,7 @@ python manage.py runserver # starts the server
 Please see requirements.txt for more information.
 
 ## API
-
+The input examples are httpie commands  
 1.  List all images  
    API: ``` image_api/  ```  
    Method: GET  
