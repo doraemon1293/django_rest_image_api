@@ -1,75 +1,173 @@
-# django_rest_image_api
 
-A project provides api to allowing uploading rotating and retrieving pictures,coverting the format.
 
-### Quick Start
+# ProgImage API
 
-1 clone the project
+A project provides api to allowing uploading, rotating and retrieving pictures,coverting the format.
 
-2 virtualenv -p python3.4 venv # Note: python3.5 should also work
-  source venv/bin/activate
-  pip install -r requirements.txt
-  cd django_rest_image_api
-  python manage.py migrate
-  python manage.py runserver # starts the server 
+## Running Environment
+Windows  
+Python 3.5.4  
+Virtual environment  
+Django 2.1.1  
+djangorestframework 3.8.2  
 
+
+## Quick Start
+
+```bash
+git clone https://github.com/doraemon1293/django_rest_image_api.git
+cd django_rest_image_api
+virtualenv -p python3.4 venv # Note: python3.5 should also work
+source venv/bin/activate
+pip install -r requirements.txt
+cd django_rest_imageupload_backend
+python manage.py migrate
+python manage.py runserver # starts the server 
+```
 Please see requirements.txt for more information.
 
 ## API
 
-1 get image list api
-  URL: image_api/
-  example:
-    http GET http://127.0.0.1:8000/image_api/
-    response:
-            [
-                {
-                    "pk": 47,
-                    "fn": "/images/7033ab72-1bfa-46e4-9428-3b3e780d5972.jpeg",
-                    "extension": "jpeg"
-                }
-            ]
-    # pk is primary key, fn the url of uploaded file, extension is the format of the image
+1.  List all images
+   API: ``` image_api/  ```
+   Method: GET
+   Possible Status Code: 200, 404, 50X
+   Example of input: ```http GET http://127.0.0.1:8000/image_api/```
+   Example of output
+```
+HTTP/1.1 200 OK
+Allow: GET, POST, HEAD, OPTIONS
+Content-Length: 87
+Content-Type: application/json
+Date: Tue, 25 Sep 2018 20:42:10 GMT
+Server: WSGIServer/0.2 CPython/3.5.4
+Vary: Accept, Cookie
+X-Frame-Options: SAMEORIGIN
 
-2 get a image
-  URL: image_api/<int:pk>/
-  example:
-  http GET http://127.0.0.1:8000/image_api/47
-  response  
-        {
-            "extension": "jpeg",
-            "fn": "/images/7033ab72-1bfa-46e4-9428-3b3e780d5972.jpeg",
-            "pk": 47
-        }
-
-3 to download file
-  URL: HOSTNAME+fn
-  example:
-    http http://127.0.0.1:8000/images/7033ab72-1bfa-46e4-9428-3b3e780d5972.jpeg -o download_file_name
-    
-2 covert format of a image
-  URL: image_api/<int:pk>/transfer/<image_format:extension>/
-  example:
-  http GET http://127.0.0.1:8000/image_api/47/transfer/png/
-  response.data
+[
     {
+        "extension": "jpeg",
+        "fn": "/images/7033ab72-1bfa-46e4-9428-3b3e780d5972.jpeg",
+        "pk": 47
+    }
+]
+
+```
+pk is primary key, fn is the URL of uploaded file, extension is the format of the image  
+
+2.  Get a image  
+  URL: ```image_api/<int:pk>/  ```
+   Method: GET
+   Possible Status Code: 200, 404, 50X
+   Example of input: ```http GET http://127.0.0.1:8000/image_api/47/```
+   Example of output:
+   ```
+   HTTP/1.1 200 OK
+Allow: GET, PUT, DELETE, HEAD, OPTIONS
+Content-Length: 85
+Content-Type: application/json
+Date: Tue, 25 Sep 2018 20:43:29 GMT
+Server: WSGIServer/0.2 CPython/3.5.4
+Vary: Accept, Cookie
+X-Frame-Options: SAMEORIGIN
+
+{
+    "extension": "jpeg",
+    "fn": "/images/7033ab72-1bfa-46e4-9428-3b3e780d5972.jpeg",
+    "pk": 47
+}
+```
+
+
+3.  Upload images
+    API: ``` image_api/```
+   Method: POST
+   Possible Status Code: 200, 404, 50X
+Example of input: ```http -f POST http://127.0.0.1:8000/i
+mage_api/ fn@C:\1.jpeg```
+Example of output:
+```
+HTTP/1.1 201 Created
+Allow: GET, POST, HEAD, OPTIONS
+Content-Length: 85
+Content-Type: application/json
+Date: Tue, 25 Sep 2018 20:49:02 GMT
+Server: WSGIServer/0.2 CPython/3.5.4
+Vary: Accept, Cookie
+X-Frame-Options: SAMEORIGIN
+
+{
+    "extension": "jpeg",
+    "fn": "/images/275af740-3786-4e2f-b93c-b16cb634b733.jpeg",
+    "pk": 48
+}
+```
+4.  convert format of a image
+    API:```image_api/<int:pk>/transfer/<image_format:extension>/```
+   Method: GET
+   Possible Status Code: 200, 404, 50X
+Example of input: ```http GET  http://127.0.0.1:8000/image_api/48/transfer/png/```
+Example of output:
+```
+HTTP/1.1 200 OK
+Allow: GET, HEAD, OPTIONS
+Content-Length: 98
+Content-Type: application/json
+Date: Tue, 25 Sep 2018 20:53:13 GMT
+Server: WSGIServer/0.2 CPython/3.5.4
+Vary: Accept, Cookie
+X-Frame-Options: SAMEORIGIN
+
+{
     "extension": "png",
-    "fn": "/images/7033ab72-1bfa-46e4-9428-3b3e780d5972.png",
-    "pk": 32,
-    "source_pk": 47
+    "fn": "/images/275af740-3786-4e2f-b93c-b16cb634b733.png",
+    "pk": 34,
+    "source_pk": 48
 }
+```
+pk is primary key, source_pk is the foreign key to original image. fn is the URL of uploaded file, extension is the format of the image.
 
-4 rotate image
-  URL: image_api/<int:pk>/rotate/<int:degree>/
-  http GET http://127.0.0.1:8000/image_api/47/rotate/90/
-  response.data
-  {
+5.  rotate image
+    API: ```image_api/<int:pk>/rotate/<int:degree>/```
+   Method: GET
+   Possible Status Code: 200, 404, 50X
+Example of input: ```http GET  http://127.0.0.1:8000/image_api/48/rotate/90/```
+Example of output:
+```
+HTTP/1.1 200 OK
+Allow: GET, HEAD, OPTIONS
+Content-Length: 96
+Content-Type: application/json
+Date: Tue, 25 Sep 2018 20:57:50 GMT
+Server: WSGIServer/0.2 CPython/3.5.4
+Vary: Accept, Cookie
+X-Frame-Options: SAMEORIGIN
+
+{
     "degree": 90,
-    "fn": "/images/7033ab72-1bfa-46e4-9428-3b3e780d5972_90..jpeg",
-    "pk": 1,
-    "source_pk": 47
+    "fn": "/images/275af740-3786-4e2f-b93c-b16cb634b733_90..jpeg",
+    "pk": 2,
+    "source_pk": 48
 }
+```
+6.  to download file
+  URL: HOSTNAME+fn
+  example:```
+    http http://127.0.0.1:8000/images/7033ab72-1bfa-46e4-9428-3b3e780d5972.jpeg -o download_file_name```
+    
 
-
+## TEST
+1. class ListImagesTest
+  test the api to list all images
+2. class GetImageTest
+  test the api to get a specific all images as per pk
+3. class UploadImageTest
+  upload an Image, get the Image file, download file and compare whether the files is the same with original one
+4. class TransferImageTest
+  upload the image and download the format converted image,
+  if _compare_file_required, this method will also compare whether the transfered file is exactly the same with sample file
+  As some conversion cannot guarantee the file is always the same, for example from png to jpeg, so should not compare files in that case
+5. class RotateImageTest
+  upload the image and download the rotated image. this method will also compare whether the transfered file is exactly the same with sample file
 
 
