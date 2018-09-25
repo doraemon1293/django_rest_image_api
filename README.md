@@ -2,7 +2,7 @@
 
 # ProgImage API
 
-A project provides api to allowing uploading, rotating and retrieving pictures,coverting the format.
+A project provides API to allowing uploading, rotating and retrieving pictures,coverting the format.
 
 ## Running Environment
 Windows  
@@ -157,6 +157,7 @@ X-Frame-Options: SAMEORIGIN
     
 
 ## TEST
+python manage.py test
 1. class ListImagesTest  
   test the api to list all images  
 2. class GetImageTest  
