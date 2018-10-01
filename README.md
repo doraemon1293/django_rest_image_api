@@ -199,5 +199,5 @@ python manage.py test
 5. class RotateImageTest  
   upload the image and download the rotated image. this method will also compare whether the transfered file is exactly the same with sample file  
 
-## Authors
+## Author
 Yan HUANG
